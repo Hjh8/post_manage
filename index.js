@@ -4,7 +4,7 @@ const path = require('path')
 const app = express()
 
 app.use(express.static(path.join(__dirname,'./dist')))
-app.use(express.static(path.join(__dirname,'./routers')))
+
 // 解决跨域问题
 app.all('/*', function(req, res, next) {
   // 允许的跨域的域名
