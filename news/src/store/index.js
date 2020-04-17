@@ -8,9 +8,17 @@ export default new Vuex.Store({
     userInfo:{},
     newsInfo:[],
     payment:0,
-    totalNum:0
+    totalNum:0,
+    isDrawer:false,
+    isDialog:false
   },
   mutations: {
+    setIsDrawer(state){
+      state.isDrawer = !state.isDrawer
+    },
+    setDialog(state){
+      state.isDialog = !state.isDialog
+    },
     setNewsInfo(state,news){
       // 增加已订报刊
       state.newsInfo.push(news)
@@ -18,6 +26,10 @@ export default new Vuex.Store({
       state.totalNum += news.number
       // 计算总价
       state.payment += parseFloat((parseFloat(news.price)*news.number).toFixed(2))
+    },
+    setUserInfo(state,user){
+      state.userInfo = user
+      state.userInfo.payment = state.payment
     },
     delNewsInfo(state,delNews){
       for(let i in state.newsInfo){
@@ -30,6 +42,12 @@ export default new Vuex.Store({
           state.newsInfo.splice(i,1)
         }
       }
+    },
+    clear(state){
+      // 清空已购表格
+      state.newsInfo = []
+      state.number = 0
+      state.payment = 0
     }
   },
   actions: {

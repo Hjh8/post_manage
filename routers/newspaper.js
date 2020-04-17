@@ -19,7 +19,35 @@ router.get('/newsInfo',(req,res) => {
 })
 
 router.post('/purchase',(req,res)=>{
-  res.json('我是购买路由')
+  const user = req.body.userInfo
+  const news = req.body.newsInfo
+  const sql_user = 'insert into user value (?,?,?,?,?,?,current_timestamp);'
+  const sql_news = 'insert into purchase value ?;'
+
+  const params_user = [
+    user.id,user.name,user.phone,
+    user.address,user.code,user.payment,
+  ]
+  const params_news = []
+  for(let news of req.body.newsInfo){
+    params_news.push([user.id,news.id,news.price,news.number])
+  }
+  
+  conn.query(sql_user,params_user,(err)=>{
+    if(err) throw err
+    conn.query(sql_news,[params_news],(err)=>{
+      if(err) throw err
+      res.json({status:200,message:'成功'})
+    })
+  })
+})
+
+router.post('/search',(req,res) => {
+  const sql = 'select * from order_detail where id=?;'
+  conn.query(sql,[req.body.id],(err,result)=>{
+    if(err) throw err
+    res.json({data:result})
+  })
 })
 
 module.exports = router

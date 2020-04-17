@@ -1,7 +1,7 @@
 <template>
   <div class="table_div">
     <h2><Icon type="ios-bookmarks-outline" /> 可订报刊详情</h2>
-    <Table border :columns="columns" :data="data" class="table" height='445'></Table>
+    <Table border :columns="columns" :data="data" height='445'></Table>
     <br>
     <b>
       共订阅了{{this.$store.state.totalNum}}份报刊,

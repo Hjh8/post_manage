@@ -5,17 +5,31 @@
     <Table :columns="Tcolumns" :data="Tdata" :show-header="false" 
     border :span-method="handleSpan" :disabled-hover='true'></Table>
     <div class="btn_div">
-      <Button shape="circle" type="error" ghost style="margin:10px;transform:translate(200%);">
+      <Button shape="circle" type="error" @click="clear"
+      ghost style="margin:10px;transform:translate(200%);">
         清空已订列表
       </Button>
-      <Button shape="circle" type="success" ghost style="margin:10px;transform:translate(250%);">
+      <Button shape="circle" type="success" @click="pay"
+      ghost style="margin:10px;transform:translate(250%);">
         支付下单
       </Button>
     </div>
+
+    <!-- 用户填写支付信息 -->
+    <Drawer :value="this.$store.state.isDrawer"
+    width='500' :mask-closable='false' @on-close='close'>
+      <payment></payment>
+    </Drawer>
+
+    <!-- 用户支付页面 -->
+    <sweep v-if="this.$store.state.isDialog"></sweep>
   </div>
 </template>
 
 <script>
+import payment from 'components/Payment.vue'
+import sweep from 'components/SweepCode.vue'
+
 export default {
   inject:['reload'],
   beforeMount(){
@@ -76,12 +90,26 @@ export default {
       ]
     }
   },
+  components:{
+    payment,
+    sweep
+  },
   methods:{
     handleSpan({ row, column, rowIndex, columnIndex }){
       if(columnIndex==1) return [1,6]
     },
     reLoad(){
       this.reload()
+    },
+    clear(){
+      this.$store.commit('clear')
+      this.reLoad()
+    },
+    pay(){
+      this.$store.commit('setIsDrawer')
+    },
+    close(){
+      this.$store.commit('setIsDrawer')
     }
   }
 }

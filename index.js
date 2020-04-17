@@ -1,8 +1,10 @@
 const express = require('express')
 const bodyparser = require("body-parser")
-
+const path = require('path')
 const app = express()
 
+app.use(express.static(path.join(__dirname,'./dist')))
+app.use(express.static(path.join(__dirname,'./routers')))
 // 解决跨域问题
 app.all('/*', function(req, res, next) {
   // 允许的跨域的域名
@@ -25,6 +27,6 @@ app.use(bodyparser.urlencoded({extended:false}))
 const newspaper = require("./routers/newspaper")
 app.use(newspaper)
 
-app.listen(3000,()=>{
+app.listen(3333,()=>{
   console.log('服务器正在开启')
 })
