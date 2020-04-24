@@ -6,7 +6,7 @@ const router = express.Router()
 const conn = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : '5642818',
+  password : 'Hjh5642818$$$',
   database : 'post_manage'
 })
 
@@ -50,4 +50,30 @@ router.post('/search',(req,res) => {
   })
 })
 
+router.get('/sales',(req,res) => {
+  const sql_news = 'select name,salesnumber as value from sales_ranking ORDER BY salesNumber DESC LIMIT 0,10;'
+  const sql_unit = `select unit as name,sum(salesNumber) as value
+                    from sales_ranking
+                    GROUP BY unit
+                    ORDER BY sum(salesNumber) DESC
+                    LIMIT 0,3;`
+  conn.query(sql_news,(err1,result1)=>{
+    if(err1) throw err1
+    conn.query(sql_unit,(err2,result2) => {
+      if(err2) throw err2
+      const sql3 = 'select * from monthly_sales'
+      conn.query(sql3,(err3,result3) => {
+        res.json({newsData:result1,unitData:result2,sales:result3})
+      })
+    })
+  })
+})
+
+/**
+ * 如果需要增加每年、每月、每日销售额可以参考此sql语句
+ *  select year(time),month(time),day(time),
+    count(id) 
+    from order_detail
+    group by year(time),month(time),day(time)
+ */
 module.exports = router

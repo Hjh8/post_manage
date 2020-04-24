@@ -35,9 +35,7 @@ export default {
       this.$store.commit('clear')
       this.reload()
       // 关闭对话框
-      setTimeout(() => {
-        this.$store.commit('setDialog')
-      }, 2000);
+      this.$store.commit('setDialog')
     }
   }
 }

@@ -5,10 +5,11 @@ const Welcome = ()=> import('components/Welcome.vue')
 const ordered = ()=>import('components/Ordered.vue')
 const allow = ()=>import('components/Allow.vue')
 const find = () => import('components/Find.vue')
+const manager = () => import('components/Manager.vue')
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
     redirect:'/home'
@@ -36,6 +37,10 @@ Vue.use(VueRouter)
       {
         path:'/查询订单',
         component:find
+      },
+      {
+        path:'/报刊售况',
+        component:manager
       }
     ]
   }

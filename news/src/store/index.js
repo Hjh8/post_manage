@@ -46,7 +46,7 @@ export default new Vuex.Store({
     clear(state){
       // 清空已购表格
       state.newsInfo = []
-      state.number = 0
+      state.totalNum = 0
       state.payment = 0
     }
   },

@@ -17,14 +17,17 @@
           <Layout>
             <Sider hide-trigger :style="{background: '#fff'}">
               <Menu theme="light" width="auto" style="height:100%;">
-                  <MenuItem name="allow" to='/可订报刊' style="font-size:18px;">
+                  <MenuItem name="allow" to='/可订报刊' style="font-size:15px;">
                     <Icon type="ios-bookmarks-outline" />可订报刊
                   </MenuItem>
-                  <MenuItem name="ordered" to='/已订报刊' style="font-size:18px;">
+                  <MenuItem name="ordered" to='/已订报刊' style="font-size:15px;">
                     <Icon type="ios-card" />已订报刊
                   </MenuItem>
-                  <MenuItem name="find" to='/查询订单' style="font-size:18px;">
+                  <MenuItem name="find" to='/查询订单' style="font-size:15px;">
                     <Icon type="ios-search" />查询订单
+                  </MenuItem>
+                  <MenuItem name="sales" to='/报刊售况' style="font-size:15px;">
+                    <Icon type="md-analytics" />报刊售况
                   </MenuItem>
               </Menu>
             </Sider>
