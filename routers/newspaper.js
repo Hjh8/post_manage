@@ -6,7 +6,7 @@ const router = express.Router()
 const conn = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'Hjh5642818$$$',
+  password : '5642818',
   database : 'post_manage'
 })
 
@@ -20,7 +20,7 @@ router.get('/newsInfo',(req,res) => {
 
 router.post('/purchase',(req,res)=>{
   const user = req.body.userInfo
-  const news = req.body.newsInfo
+  const news_list = req.body.newsInfo
   const sql_user = 'insert into user value (?,?,?,?,?,?,current_timestamp);'
   const sql_news = 'insert into purchase value ?;'
 
@@ -29,7 +29,7 @@ router.post('/purchase',(req,res)=>{
     user.address,user.code,user.payment,
   ]
   const params_news = []
-  for(let news of req.body.newsInfo){
+  for(let news of news_list){
     params_news.push([user.id,news.id,news.price,news.number])
   }
   

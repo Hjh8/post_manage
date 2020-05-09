@@ -129,13 +129,16 @@ export default {
         this.option.legend.data.push(i.name)
         this.option.series[1].data.push(i)
       }
+      // 使得图饼的第二段被选中
       let j = 0;
       for(let i of resdata.unitData){
         if(j++==1) {
           i.selected = true;
         }
+        //向图中数据的数组里添加内容
         this.option.series[0].data.push(i)
       }
+      //初始化图表
       let myChart = echarts.init(document.getElementById('manager'));
       myChart.setOption(this.option,true);
     }

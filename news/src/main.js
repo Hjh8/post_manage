@@ -7,7 +7,6 @@ import 'view-design/dist/styles/iview.css';
 import Axios from 'axios';
 // 城市级联选择
 import Distpicker from 'v-distpicker'
-import echarts from 'echarts'
 
 Vue.component('v-distpicker', Distpicker)
 
