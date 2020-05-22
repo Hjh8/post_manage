@@ -61,7 +61,7 @@ router.get('/sales',(req,res) => {
     if(err1) throw err1
     conn.query(sql_unit,(err2,result2) => {
       if(err2) throw err2
-      const sql3 = 'select * from monthly_sales'
+      const sql3 = 'select * from monthly_sales where 月份=month(now())'
       conn.query(sql3,(err3,result3) => {
         res.json({newsData:result1,unitData:result2,sales:result3})
       })
@@ -69,11 +69,4 @@ router.get('/sales',(req,res) => {
   })
 })
 
-/**
- * 如果需要增加每年、每月、每日销售额可以参考此sql语句
- *  select year(time),month(time),day(time),
-    count(id) 
-    from order_detail
-    group by year(time),month(time),day(time)
- */
 module.exports = router

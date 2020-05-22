@@ -6,9 +6,9 @@
       <div class="salesment">
         <Card>
           <Tag color="purple" size='large' style="width:150px;text-align:center">
-            月 销 售 量：{{sales.Mpaymeny}} 元
+            月 销 售 量：{{sales.Mpayment}} 元
           </Tag>
-          <Divider style="width:100px"><Icon type="ios-planet-outline" /></Divider>
+          <Divider style="width:100px">{{sales.月份}}月<Icon type="ios-planet-outline" /></Divider>
           <Tag color="gold" size='large' style="width:150px;text-align:center">
             月 销 售 额：{{sales['Msalenum']}} 份 
           </Tag>
@@ -123,13 +123,12 @@ export default {
       }
       // 存入月销售量跟销售额
       this.sales = resdata.sales[0]
-
       // 将前十的报刊名称作为图例
       for(let i of resdata.newsData){
         this.option.legend.data.push(i.name)
         this.option.series[1].data.push(i)
       }
-      // 使得图饼的第二段被选中
+      // 默认得图饼的第二段被选中
       let j = 0;
       for(let i of resdata.unitData){
         if(j++==1) {
