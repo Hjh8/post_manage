@@ -13,8 +13,8 @@ Vue.component('v-distpicker', Distpicker)
 Vue.use(ViewUI);
 Vue.config.productionTip = false
 
-Axios.defaults.baseURL = 'http://47.115.46.57:3333/'
-// Axios.defaults.baseURL = 'http://localhost:3333/'
+// Axios.defaults.baseURL = 'http://47.115.46.57:3333/'
+Axios.defaults.baseURL = 'http://localhost:3333/'
 Vue.prototype.$axios = Axios
 
 new Vue({

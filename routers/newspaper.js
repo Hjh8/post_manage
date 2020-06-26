@@ -24,22 +24,41 @@ router.post('/purchase',(req,res)=>{
   const sql_user = 'insert into user value (?,?,?,?,?,?,current_timestamp);'
   const sql_news = 'insert into purchase value ?;'
 
+  //保存用户信息
   const params_user = [
     user.id,user.name,user.phone,
     user.address,user.code,user.payment,
   ]
+  // 保存已订报刊信息
   const params_news = []
   for(let news of news_list){
     params_news.push([user.id,news.id,news.price,news.number])
   }
   
-  conn.query(sql_user,params_user,(err)=>{
-    if(err) throw err
-    conn.query(sql_news,[params_news],(err)=>{
-      if(err) throw err
-      res.json({status:200,message:'成功'})
+  // conn.query(sql_user,params_user,(err)=>{
+  //   if(err) throw err
+  //   conn.query(sql_news,[params_news],(err)=>{
+  //     if(err) throw err
+  //     res.json({status:200,message:'成功'})
+  //   })
+  // })
+
+  Promise
+  .all([
+    new Promise((resolve,reject) => {
+      conn.query(sql_user,params_user, err => {
+        if(err) throw reject(err)
+        else resolve()
+      })
+    }),
+    new Promise((resolve,reject) => {
+      conn.query(sql_news,[params_news], err => {
+        if(err) throw reject(err)
+        else resolve()
+      })
     })
-  })
+  ])
+  .then(() => {res.json({status:200,message:'成功'})})
 })
 
 router.post('/search',(req,res) => {
